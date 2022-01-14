@@ -4,14 +4,20 @@ import Star from './Star';
 
 type StarRatingProp = {
   totalStars?: number;
+  style?: React.CSSProperties;
+  [key: string]: any;
 };
 
 const createArray = (length: number) => [...Array(length)];
 
-const StarRating = ({ totalStars = 5 }: StarRatingProp) => {
+const StarRating = ({
+  totalStars = 5,
+  style = {},
+  ...props
+}: StarRatingProp) => {
   const [selectedStar, setSelectedStar] = useState(0);
   return (
-    <>
+    <div style={{ padding: '5px', ...style }} {...props}>
       {createArray(totalStars).map((n, i) => (
         <Star
           key={i}
@@ -22,7 +28,7 @@ const StarRating = ({ totalStars = 5 }: StarRatingProp) => {
       <p>
         {selectedStar} of {totalStars}
       </p>
-    </>
+    </div>
   );
 };
 
