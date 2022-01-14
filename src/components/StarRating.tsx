@@ -1,34 +1,24 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import Star from './Star';
 
 type StarRatingProp = {
   totalStars?: number;
-  style?: React.CSSProperties;
-  [key: string]: any;
+  selectedStar?: number;
 };
 
 const createArray = (length: number) => [...Array(length)];
 
-const StarRating = ({
-  totalStars = 5,
-  style = {},
-  ...props
-}: StarRatingProp) => {
-  const [selectedStar, setSelectedStar] = useState(0);
+const StarRating = ({ totalStars = 5, selectedStar = 0 }: StarRatingProp) => {
   return (
-    <div style={{ padding: '5px', ...style }} {...props}>
+    <>
       {createArray(totalStars).map((n, i) => (
-        <Star
-          key={i}
-          selected={selectedStar > i}
-          onSelect={() => setSelectedStar(i + 1)}
-        />
+        <Star key={i} selected={selectedStar > i} />
       ))}
       <p>
         {selectedStar} of {totalStars}
       </p>
-    </div>
+    </>
   );
 };
 
