@@ -1,9 +1,10 @@
 import React, { Suspense, lazy, useState } from 'react';
 
-import { ClimbingBoxLoader } from 'react-spinners';
+import { ClimbingBoxLoader, GridLoader } from 'react-spinners';
 
 import Agreement from './Agreement';
 import ErrorBoundary from './ErrorBoundary';
+import Status from './Status';
 
 const Main = lazy(() => import('./Main'));
 
@@ -15,11 +16,20 @@ const SuspenseApp = () => {
   }
 
   return (
-    <ErrorBoundary>
-      <Suspense fallback={<ClimbingBoxLoader css={{ position: 'absolute' }} />}>
-        <Main />
-      </Suspense>
-    </ErrorBoundary>
+    <>
+      <ErrorBoundary>
+        <Suspense fallback={<GridLoader />}>
+          <Status />
+        </Suspense>
+      </ErrorBoundary>
+      <ErrorBoundary>
+        <Suspense
+          fallback={<ClimbingBoxLoader css={{ position: 'absolute' }} />}
+        >
+          <Main />
+        </Suspense>
+      </ErrorBoundary>
+    </>
   );
 };
 
