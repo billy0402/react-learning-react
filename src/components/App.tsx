@@ -2,21 +2,25 @@ import React, { useState } from 'react';
 
 import GitHubUser from './GitHubUser';
 import RepoReadMe from './RepoReadMe';
+import SearchForm from './SearchForm';
 import UserRepositories from './UserRepositories';
 
 const App = () => {
-  const [login, setLogin] = useState('billy0402');
-  const [repoName, setRepoName] = useState('react-learning-react');
+  const [login, setLogin] = useState('');
+  const [repoName, setRepoName] = useState('');
 
   return (
     <>
-      <GitHubUser login='billy0402' />
-      <UserRepositories
-        login={login}
-        repoName={repoName}
-        onSelect={setRepoName}
-      />
-      <RepoReadMe login={login} repoName={repoName} />
+      <SearchForm value={login} onSearch={setLogin} />
+      {login && <GitHubUser login={login} />}
+      {login && (
+        <UserRepositories
+          login={login}
+          repoName={repoName}
+          onSelect={setRepoName}
+        />
+      )}
+      {login && repoName && <RepoReadMe login={login} repoName={repoName} />}
     </>
   );
 };
