@@ -1,32 +1,18 @@
-import React from 'react';
+import React, { useContext } from 'react';
 
 import Color from './Color';
-import { Color as ColorType } from '../models/color';
+import { ColorContext } from '..';
 
-type ColorListProp = {
-  colors?: ColorType[];
-  onRateColor?: (id: string, rating: number) => void;
-  onRemoveColor?: (id: string) => void;
-};
-
-const ColorList = ({
-  colors = [],
-  onRateColor = () => ({}),
-  onRemoveColor = () => ({}),
-}: ColorListProp) => {
+const ColorList = () => {
+  const { colors } = useContext(ColorContext);
   if (!colors.length) {
-    return <>No Colors Listed.</>;
+    return <>No Colors Listed. (Add a Color)</>;
   }
 
   return (
     <>
       {colors.map((color) => (
-        <Color
-          key={color.id}
-          {...color}
-          onRate={onRateColor}
-          onRemove={onRemoveColor}
-        />
+        <Color key={color.id} {...color} />
       ))}
     </>
   );
