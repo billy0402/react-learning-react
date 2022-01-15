@@ -1,15 +1,9 @@
 import React from 'react';
 
-import AddColorForm from './AddColorForm';
-import ColorList from './ColorList';
+import GitHubUser from './GitHubUser';
 
 const App = () => {
-  return (
-    <>
-      <AddColorForm />
-      <ColorList />
-    </>
-  );
+  return <GitHubUser login='billy0402' />;
 };
 
 export default App;
