@@ -1,6 +1,12 @@
 import React from 'react';
 
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
+
+const Whoops404 = () => {
+  const location = useLocation();
+  console.log(location);
+  return <h1>Resource not found at {location.pathname}</h1>;
+};
 
 const Home = () => {
   return (
@@ -11,6 +17,7 @@ const Home = () => {
         <Link to='event'>Event</Link>
         <Link to='product'>Product</Link>
         <Link to='contact'>Contact</Link>
+        <Link to='highway'>Highway</Link>
       </nav>
     </>
   );
@@ -32,4 +39,4 @@ const Contact = () => {
   return <h1>[Contact]</h1>;
 };
 
-export { Home, About, Event, Product, Contact };
+export { Whoops404, Home, About, Event, Product, Contact };
