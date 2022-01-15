@@ -1,10 +1,10 @@
-import React, { useContext } from 'react';
+import React from 'react';
 
 import Color from './Color';
-import { ColorContext } from '../providers/ColorProvider';
+import useColors from '../hooks/useColors';
 
 const ColorList = () => {
-  const { colors } = useContext(ColorContext);
+  const { colors } = useColors();
   if (!colors.length) {
     return <>No Colors Listed. (Add a Color)</>;
   }
