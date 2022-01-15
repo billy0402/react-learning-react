@@ -3,6 +3,12 @@ type GitHubUser = {
   name: string;
   location: string;
   avatar_url: string;
+  repositories: Repositories;
+};
+
+type Repositories = {
+  totalCount: number;
+  nodes: GitHubRepo[];
 };
 
 type GitHubRepo = {
