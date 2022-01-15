@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 
 import Color from './Color';
-import { ColorContext } from '..';
+import { ColorContext } from '../providers/ColorProvider';
 
 const ColorList = () => {
   const { colors } = useContext(ColorContext);

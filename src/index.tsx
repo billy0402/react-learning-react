@@ -1,19 +1,12 @@
-import React, { createContext } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
 
 import App from './components/App';
-import { Color as ColorType } from './models/color';
-import colors from './data/colors.json';
-
-type ColorContextType = {
-  colors: ColorType[];
-};
-
-export const ColorContext = createContext<ColorContextType>({ colors: [] });
+import { ColorProvider } from './providers/ColorProvider';
 
 ReactDOM.render(
-  <ColorContext.Provider value={{ colors }}>
+  <ColorProvider>
     <App />
-  </ColorContext.Provider>,
+  </ColorProvider>,
   document.getElementById('root'),
 );
