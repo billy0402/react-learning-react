@@ -11,6 +11,8 @@ const saveJson = (key: string, data: any) =>
 
 const GitHubUser = ({ login }: GitHubUserProp) => {
   const [data, setData] = useState(loadJson(`user:${login}`));
+  const [error, setError] = useState();
+  const [loading, setLoading] = useState();
 
   useEffect(() => {
     if (!data) return;
@@ -32,11 +34,20 @@ const GitHubUser = ({ login }: GitHubUserProp) => {
       .catch(console.error);
   }, [login]);
 
-  if (!data) {
-    return null;
-  }
+  if (loading) return <h1>loading...</h1>;
+  if (error) return <pre>{JSON.stringify(error, null, 2)}</pre>;
+  if (!data) return null;
 
-  return <pre>{JSON.stringify(data, null, 2)}</pre>;
+  return (
+    <>
+      <img src={data.avatar_url} />
+      <>
+        <h1>{data.login}</h1>
+        {data.name && <p>{data.name}</p>}
+        {data.location && <p>{data.location}</p>}
+      </>
+    </>
+  );
 };
 
 export default GitHubUser;
