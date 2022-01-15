@@ -6,6 +6,7 @@ import RepoMenu from './RepoMenu';
 
 type UserRepositoriesProp = {
   login: string;
+  repoName: string;
   onSelect?: (repoName: string) => void;
 };
 
