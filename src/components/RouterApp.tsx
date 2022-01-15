@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Route, Routes } from 'react-router';
+import { Navigate, Route, Routes } from 'react-router';
 
 import {
   About,
@@ -29,6 +29,10 @@ const RouterApp = () => {
       <Route path='product' element={<Product />} />
       <Route path='contact' element={<Contact />} />
       <Route path='*' element={<Whoops404 />} />
+      <Route
+        path='services'
+        element={<Navigate replace to='/about/services' />}
+      />
     </Routes>
   );
 };
