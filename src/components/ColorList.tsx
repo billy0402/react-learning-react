@@ -4,7 +4,7 @@ import Color from './Color';
 import { Color as ColorType } from '../models/color';
 
 type ColorListProp = {
-  colors: ColorType[];
+  colors?: ColorType[];
   onRateColor?: (id: string, rating: number) => void;
   onRemoveColor?: (id: string) => void;
 };
