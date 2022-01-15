@@ -3,12 +3,12 @@ import ReactDOM from 'react-dom';
 
 import 'regenerator-runtime/runtime';
 
-import App from './components/App';
 import { ColorProvider } from './providers/ColorProvider';
+import SuspenseApp from './components/SuspenseApp';
 
 ReactDOM.render(
   <ColorProvider>
-    <App />
+    <SuspenseApp />
   </ColorProvider>,
   document.getElementById('root'),
 );
