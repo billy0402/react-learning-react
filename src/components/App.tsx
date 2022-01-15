@@ -9,9 +9,19 @@ const App = () => {
   const [login, setLogin] = useState('');
   const [repoName, setRepoName] = useState('');
 
+  const handleSearch = (login: string) => {
+    if (login) return setLogin(login);
+    setLogin('');
+    setRepoName('');
+  };
+
+  if (!login) {
+    return <SearchForm value={login} onSearch={handleSearch} />;
+  }
+
   return (
     <>
-      <SearchForm value={login} onSearch={setLogin} />
+      <SearchForm value={login} onSearch={handleSearch} />
       {login && <GitHubUser login={login} />}
       {login && (
         <UserRepositories

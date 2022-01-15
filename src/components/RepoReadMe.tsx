@@ -2,6 +2,8 @@ import React, { useCallback, useEffect, useState } from 'react';
 
 import ReactMarkdown from 'react-markdown';
 
+import useMountRef from '../hooks/useMountRef';
+
 type RepoReaMeProp = {
   login: string;
   repoName: string;
@@ -11,14 +13,17 @@ const RepoReadMe = ({ login, repoName }: RepoReaMeProp) => {
   const [markdown, setMarkdown] = useState('');
   const [error, setError] = useState();
   const [loading, setLoading] = useState(false);
+  const mounted = useMountRef();
 
   const loadReadMe = useCallback(async (login, repo) => {
     setLoading(true);
     const uri = `https://api.github.com/repos/${login}/${repo}/readme`;
     const { download_url } = await fetch(uri).then((res) => res.json());
     const markdown = await fetch(download_url).then((res) => res.text());
-    setMarkdown(markdown);
-    setLoading(false);
+    if (mounted.current) {
+      setMarkdown(markdown);
+      setLoading(false);
+    }
   }, []);
 
   useEffect(() => {
