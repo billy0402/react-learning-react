@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Navigate, Route, Routes } from 'react-router';
+import { Navigate, useRoutes } from 'react-router';
 
 import {
   About,
@@ -16,25 +16,25 @@ import {
 } from './Page';
 
 const RouterApp = () => {
-  return (
-    <Routes>
-      <Route path='/' element={<Home />} />
-      <Route path='about' element={<About />}>
-        <Route path='' element={<Company />} />
-        <Route path='services' element={<Services />} />
-        <Route path='history' element={<History />} />
-        <Route path='location' element={<Location />} />
-      </Route>
-      <Route path='event' element={<Event />} />
-      <Route path='product' element={<Product />} />
-      <Route path='contact' element={<Contact />} />
-      <Route path='*' element={<Whoops404 />} />
-      <Route
-        path='services'
-        element={<Navigate replace to='/about/services' />}
-      />
-    </Routes>
-  );
+  const routes = useRoutes([
+    { path: '', element: <Home /> },
+    {
+      path: 'about',
+      element: <About />,
+      children: [
+        { path: '', element: <Company /> },
+        { path: 'services', element: <Services /> },
+        { path: 'history', element: <History /> },
+        { path: 'location', element: <Location /> },
+      ],
+    },
+    { path: 'event', element: <Event /> },
+    { path: 'product', element: <Product /> },
+    { path: 'contact', element: <Contact /> },
+    { path: '*', element: <Whoops404 /> },
+    { path: 'services', element: <Navigate replace to='/about/services' /> },
+  ]);
+  return routes;
 };
 
 export default RouterApp;
