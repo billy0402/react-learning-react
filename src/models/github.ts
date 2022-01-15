@@ -5,4 +5,8 @@ type GitHubUser = {
   avatar_url: string;
 };
 
-export type { GitHubUser };
+type GitHubRepo = {
+  name: string;
+};
+
+export type { GitHubUser, GitHubRepo };

@@ -14,7 +14,7 @@ const Fetch = <T,>({
   renderError = (error) => <pre>{JSON.stringify(error, null, 2)}</pre>,
   loadingFallback = <h1>loading...</h1>,
 }: FetchProp<T>) => {
-  const { data, error, loading } = useFetch<T>(uri, {} as T);
+  const { data, error, loading } = useFetch<T>(uri, undefined);
 
   if (loading) return loadingFallback;
   if (error) return renderError(error);
