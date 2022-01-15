@@ -1,38 +1,17 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
+
+import { GitHubUser as GitHubUserType } from '../models/githubUser';
+import useFetch from '../hooks/useFetch';
 
 type GitHubUserProp = {
   login: string;
 };
 
-const loadJson = (key: string) =>
-  JSON.parse(localStorage.getItem(key) || 'null');
-const saveJson = (key: string, data: any) =>
-  localStorage.setItem(key, JSON.stringify(data));
-
 const GitHubUser = ({ login }: GitHubUserProp) => {
-  const [data, setData] = useState(loadJson(`user:${login}`));
-  const [error, setError] = useState();
-  const [loading, setLoading] = useState();
-
-  useEffect(() => {
-    if (!data) return;
-    if (data.login === login) return;
-    const { name, avatar_url, location } = data;
-    saveJson(`user:${login}`, {
-      login,
-      name,
-      avatar_url,
-      location,
-    });
-  }, [data]);
-
-  useEffect(() => {
-    if (!login) return;
-    fetch(`https://api.github.com/users/${login}`)
-      .then((response) => response.json())
-      .then(setData)
-      .catch(console.error);
-  }, [login]);
+  const { data, error, loading } = useFetch<GitHubUserType>(
+    `https://api.github.com/users/${login}`,
+    {} as GitHubUserType,
+  );
 
   if (loading) return <h1>loading...</h1>;
   if (error) return <pre>{JSON.stringify(error, null, 2)}</pre>;
@@ -40,7 +19,7 @@ const GitHubUser = ({ login }: GitHubUserProp) => {
 
   return (
     <>
-      <img src={data.avatar_url} />
+      <img src={data.avatar_url} alt={data.login} style={{ width: 200 }} />
       <>
         <h1>{data.login}</h1>
         {data.name && <p>{data.name}</p>}
