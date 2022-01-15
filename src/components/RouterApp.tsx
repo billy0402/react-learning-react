@@ -1,6 +1,8 @@
 import React from 'react';
 
 import { Navigate, useRoutes } from 'react-router';
+import ColorDetail from './ColorDetail';
+import ColorList from './ColorList';
 
 import {
   About,
@@ -18,6 +20,8 @@ import {
 const RouterApp = () => {
   const routes = useRoutes([
     { path: '', element: <Home /> },
+    { path: 'color', element: <ColorList /> },
+    { path: 'color/:id', element: <ColorDetail /> },
     {
       path: 'about',
       element: <About />,

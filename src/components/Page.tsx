@@ -13,6 +13,7 @@ const Home = () => {
     <>
       <h1>[Company Website]</h1>
       <nav>
+        <Link to='color'>Color</Link>
         <Link to='about'>About</Link>
         <Link to='services'>Services</Link>
         <Link to='about/services'>Services</Link>
